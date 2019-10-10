@@ -8,7 +8,7 @@ Import the `decoder` function from the `bencode.decoding` module and simply run 
 
     from bencode.decoding import decode
 
-    contents = b'd3:foo3bar1:ai22eel3:abci9ee'
+    contents = b'd3:foo3:bar1:ai22eel3:abci9ee'
     data = decode(contents)
     # [{b'foo': b'bar', b'a':22}, [b'abc', 9]]
 

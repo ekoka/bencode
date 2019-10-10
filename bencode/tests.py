@@ -5,6 +5,7 @@ from .decoding import (
     decode_bytestring,
     decode_list,
     parse,
+    decode,
 )
 
 @run
@@ -65,3 +66,10 @@ def test_decode_dictionary_returns_index_for_remainder():
     assert index==35
     assert inputval[index]==ord(b'e')
     assert inputval[index+1]==ord(b'x')
+
+@run
+def test_readme_example_works():
+    contents = b'd3:foo3:bar1:ai22eel3:abci9ee'
+    data = decode(contents)
+    expected = [{b'foo': b'bar', b'a':22}, [b'abc', 9]]
+    assert expected==data
