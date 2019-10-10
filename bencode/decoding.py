@@ -1,15 +1,15 @@
 def decode(contents):
     try:
-        # the parser will use the final 'e' to return the data
-         data, index = parse(contents + b'e')
-         return data
+        # the parser will use the additional 'e' to return the data
+        data, index = parse(contents + b'e')
+        return data
     except TypeError as e:
         raise TypeError('Wrong string type. Expected bytes, received unicode')
     except: 
         raise ValueError('Malformed bencoded data')
 
 def parse(bytedata, index=-1):
-    context = []
+    context = [] # container of parsed and resolved data
     while True:
         index += 1
 
@@ -52,7 +52,7 @@ def decode_integer(data, start):
         end += 1
 
 def decode_bytestring(data, index):
-    length = 0
+    length = 0 # length of the bytestring to parse
     while True:
         length = length * 10 + int(chr(data[index]))
         index += 1
