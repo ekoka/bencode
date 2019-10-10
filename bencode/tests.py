@@ -1,5 +1,5 @@
-from tinytest import run
-from decoding import (
+from .tinytest import run
+from .decoding import (
     decode_integer,
     decode_dictionary,
     decode_bytestring,
