@@ -4,7 +4,7 @@ A small utility function to decode bencoded data. It was built and tested with P
 
 ## How to
 
-Import the `decoder` function from the `bencode.decoding` module and simply run it by passing a Python byte string that adhere to the bencode encoding format. The return value should be a Python list of values in native data types. Note that all string values are byte strings not unicode strings, that includes dictionary keys.
+Import the `decoder` function from the `bencode.decoding` module and simply run it by passing a Python byte string, that adheres to the bencode encoding format. The return value should be a Python list of values in native data types. Note that all string values are byte strings not unicode strings, that includes dictionary keys.
 
 ```python
 from bencode.decoding import decode
