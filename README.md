@@ -21,15 +21,20 @@ A `ValueError` will be raised if the data is believed to be malformed.
 
 ## Tests
 
-The util is bundled with a small function to run basic tests from the command line. To run, change to the project's parent directory:
+The utility is bundled with a small function to run basic tests from the command line with minimal dependencies. To run the tests, change to the project's parent directory:
 
     $ cd ~/projects/bencode
+    $ ls ./
+    ./
+    ../
+    ./bencode/
+    ./README.md
 
 Verify that you're running Python 3.6+
 
     $ python --version
     Python 3.6.7
 
-Call Python on the tests module 
+Call Python on the tests module
 
     $ python -m bencode.tests
