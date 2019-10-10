@@ -1,8 +1,8 @@
 # Bencode decoder
 
-This little utility function allows to decode bencoded data using. It was tested with Python 3.6.
+A small utility function to decode bencoded data. It was built and tested with Python 3.6.7.
 
-## How to use
+## How to
 
 Import the `decoder` function from the `bencode.decoding` module and simply run it on a Python byte string. The return value is a list of Python native data types. Note that all string values are byte strings not unicode strings, that includes dictionary keys.
 
