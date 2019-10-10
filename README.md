@@ -6,13 +6,13 @@ A small utility function to decode bencoded data. It was built and tested with P
 
 Import the `decoder` function from the `bencode.decoding` module and simply run it by passing a Python byte string that adhere to the bencode encoding format. The return value should be a Python list of values in native data types. Note that all string values are byte strings not unicode strings, that includes dictionary keys.
 
-    ```python
-    from bencode.decoding import decode
+```python
+from bencode.decoding import decode
 
-    contents = b'd3:foo3:bar1:ai22eel3:abci9ee'
-    data = decode(contents)
-    # [{b'foo': b'bar', b'a':22}, [b'abc', 9]]
-    ```
+contents = b'd3:foo3:bar1:ai22eel3:abci9ee'
+data = decode(contents)
+# [{b'foo': b'bar', b'a':22}, [b'abc', 9]]
+```
 
 ## Errors
 
