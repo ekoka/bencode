@@ -85,3 +85,16 @@ def test_malformed_content_raises_ValueError():
         error = e
     assert isinstance(error, ValueError)
     assert 'malformed' in str(error).lower()
+
+@run
+def test_TypeError_raise_for_incompatible_string():
+    # contents is unicode 
+    contents = 'd3:foo3bar1:ai22eel3:abci9ee'
+    error = None
+    try:
+        decode(contents)
+    except Exception as e:
+        error = e
+    assert isinstance(error, TypeError)
+    assert 'expected bytes' in str(error).lower()
+
