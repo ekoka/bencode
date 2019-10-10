@@ -73,3 +73,15 @@ def test_readme_example_works():
     data = decode(contents)
     expected = [{b'foo': b'bar', b'a':22}, [b'abc', 9]]
     assert expected==data
+
+@run
+def test_malformed_content_raises_ValueError():
+    # removed ':' from '3:foo' from previous example
+    contents = b'd3:foo3bar1:ai22eel3:abci9ee'
+    error = None
+    try:
+        decode(contents)
+    except Exception as e:
+        error = e
+    assert isinstance(error, ValueError)
+    assert 'malformed' in str(error).lower()
