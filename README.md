@@ -21,7 +21,7 @@ A `ValueError` will be raised if the data is believed to be malformed.
 
 ## Tests
 
-The utility is bundled with a small function to run basic tests from the command line with minimal dependencies. To run the tests, change to the project's parent directory:
+Tests are written and run with a small utility function that only depends on the `sys` module. To run them, change to the project's parent directory:
 
     $ cd ~/projects/bencode
     $ ls ./
