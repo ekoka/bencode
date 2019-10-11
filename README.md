@@ -14,6 +14,13 @@ data = decode(contents)
 # [{b'foo': b'bar', b'a':22}, [b'abc', 9]]
 ```
 
+Also see the example in `example.py` located in the project's root directory.
+
+    $ python --version
+    Python 3.6.7
+    $ cd ~/projects/bencode
+    $ python example.py
+
 ## Errors
 
 The `decode` function expects to receive data in byte string and will raise a `TypeError` if it receives an incompatible format instead (e.g. unicode).
