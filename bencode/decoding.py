@@ -2,26 +2,29 @@ def decode(contents):
     try:
         # the parser will use the additional 'e' to return the data
         return [data for data, index in parse(contents + b'e') 
-                if data is not None]
+                if data is not end_of_stream]
     except TypeError as e:
         raise TypeError('Wrong string type. Expected bytes, received unicode')
     except: 
         raise ValueError('Malformed bencoded data')
 
+end_of_stream = object()
 def parse(bytedata, index=-1):
     data = None
     while True:
 
         if data is not None:
             yield data, index
+            if data is end_of_stream:
+                return
             data = None
 
         index += 1
 
         if bytedata[index]==ord(b'e'):
             # closing a parsing context
-            yield data, index
-            return
+            data = end_of_stream
+            continue
 
         # handle int
         if bytedata[index]==ord(b'i'):
