@@ -1,43 +1,45 @@
 def decode(contents):
     try:
         # the parser will use the additional 'e' to return the data
-        data, index = parse(contents + b'e')
-        return data
+        return [data for data, index in parse(contents + b'e') 
+                if data is not None]
     except TypeError as e:
         raise TypeError('Wrong string type. Expected bytes, received unicode')
     except: 
         raise ValueError('Malformed bencoded data')
 
 def parse(bytedata, index=-1):
-    context = [] # container of parsed and resolved data
+    data = None
     while True:
+
+        if data is not None:
+            yield data, index
+            data = None
+
         index += 1
 
         if bytedata[index]==ord(b'e'):
-            # closing a context
-            return context, index
+            # closing a parsing context
+            yield data, index
+            return
 
         # handle int
         if bytedata[index]==ord(b'i'):
             data, index = decode_integer(bytedata, index)
-            context.append(data)
             continue
 
         # handle list
         if bytedata[index]==ord(b'l'):
             data, index = decode_list(bytedata, index)
-            context.append(data)
             continue
 
         # handle dict 
         if bytedata[index]==ord(b'd'):
             data, index = decode_dictionary(bytedata, index)
-            context.append(data)
             continue
 
         # handle byte
         data, index = decode_bytestring(bytedata, index)
-        context.append(data)
 
 
 def decode_integer(data, start):
@@ -62,14 +64,17 @@ def decode_bytestring(data, index):
     return data[index: index+length], index+length-1
 
 def decode_list(bytedata, index):
-    context, index = parse(bytedata, index)
-    return context, index
+    stream = [(item, index) for item, index in parse(bytedata, index)]
+    end_of_stream, index = stream.pop()
+    data = [item for item, i in stream]
+    return data, index
 
 def decode_dictionary(bytedata, index):
-    context, index = parse(bytedata, index)
+    stream = [(item, index) for item, index in parse(bytedata, index)]
+    end_of_stream, index = stream.pop()
     data = {}
-    for i in range(0, len(context), 2):
-        key = context[i]
-        value = context[i+1]
+    for i in range(0, len(stream), 2):
+        key = stream[i][0]
+        value = stream[i+1][0]
         data[key] = value
     return data, index

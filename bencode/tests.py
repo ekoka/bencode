@@ -35,7 +35,9 @@ def test_decode_bytestrint_returns_end_index():
 @run
 def test_parse_can_return_context_of_simple_values():
     inputval = b'3:abd2:ab2:cd1:ei54e3:fghi0e' + b'e'
-    data, index = parse(inputval)
+    parsed = list(parse(inputval))
+    parsed.pop()
+    data = [d for d, i in parsed]
     assert data==[b'abd', b'ab', b'cd', b'e', 54, b'fgh', 0]
 
 @run
@@ -57,6 +59,7 @@ def test_decode_dictionary_can_return_dict_of_simple_values():
     inputval = b'abd3:abd2:ab2:cd1:e2:45i54e3:fghi0eexyz'
     expected = {b'abd':b'ab', b'cd':b'e', b'45':54, b'fgh':0} 
     data, index = decode_dictionary(inputval, 2)
+    print(data)
     assert expected==data
 
 @run
